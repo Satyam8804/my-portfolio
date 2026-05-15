@@ -45,7 +45,7 @@ const portfolioConfig = {
     linkedin: "https://linkedin.com/in/Satyam8804",
     twitter: "https://twitter.com/satyam8804",
     portfolio: "https://satyam8804.github.io/MyPortfolio/portfolio",
-    leetcode: "https://leetcode.com/Satyam8804",
+    leetcode: "https://leetcode.com/u/satyam_8804/",
   },
 
   resumeUrl: "/Satyam_Resume.pdf",
