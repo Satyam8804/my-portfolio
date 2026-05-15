@@ -195,7 +195,7 @@ const portfolioConfig = {
     {
       id: 1,
       company: "Tata Consultancy Services (TCS)",
-      role: "System Engineer — Salesforce Practice",
+      role: "Associate System Engineer",
       period: "April 2025 – Present",
       location: "Bengaluru, Karnataka",
       type: "Full-time",
@@ -212,7 +212,7 @@ const portfolioConfig = {
   education: [
     {
       institution: "Lovely Professional University (LPU)",
-      degree: "B.Sc. in Computer Science",
+      degree: "B.Tech in Computer Science",
       period: "Sep 2020 – Present",
       location: "Phagwara, Punjab",
       courses: ["DSA", "DBMS", "Operating Systems", "Linux Fundamentals"],
