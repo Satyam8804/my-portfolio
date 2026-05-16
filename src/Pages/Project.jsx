@@ -54,7 +54,7 @@ export default function Projects() {
                 </p>
                 <div className="flex flex-wrap gap-2">
                   {featured.techStack.map((tech, i) => (
-                    <Capsule key={i} className="tag" Skills={tech} />
+                    <Capsule key={i} className="tag" skill={tech} />
                   ))}
                 </div>
               </div>
@@ -88,7 +88,7 @@ export default function Projects() {
                   </p>
                   <div className="flex flex-wrap gap-2">
                     {project.techStack.map((tech, i) => (
-                      <Capsule key={i} className="tag" Skills={tech} />
+                      <Capsule key={i} className="tag" skill={tech} />
                     ))}
                   </div>
                 </div>
