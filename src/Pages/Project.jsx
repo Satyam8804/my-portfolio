@@ -11,20 +11,22 @@ export default function Projects() {
       id="projects"
       className="py-24 bg-white dark:bg-gray-900 transition-colors duration-300"
     >
-      <div className="max-w-6xl mx-auto px-6">
+      <div className="max-w-6xl mx-auto px-2">
         <Reveal>
-          <p className="section-label">What I've built</p>
+          <p className="section-label font-extrabold">What I've built</p>
         </Reveal>
 
         <Reveal delay={80}>
-          <h2 className="section-title">Projects</h2>
+          <h2 className="section-title font-extrabold text-green-400">
+            Projects
+          </h2>
         </Reveal>
 
         <div className="flex flex-col gap-6">
           {/* Featured project */}
           {featured && (
             <Reveal delay={100}>
-              <div className="card p-8 bg-accent-50 dark:bg-accent-600/5 border-accent-200 dark:border-accent-600/20 hover:shadow-lg transition-all duration-200">
+              <div className="card p-0 bg-accent-50 dark:bg-accent-600/5 border-accent-200 dark:border-accent-600/20 hover:shadow-lg transition-all duration-200">
                 <DevicePair project={featured} featured />
 
                 <div className="flex flex-wrap items-start justify-between gap-4 mb-4">
@@ -63,7 +65,7 @@ export default function Projects() {
           <div className="grid md:grid-cols-2 gap-6">
             {rest.map((project, i) => (
               <Reveal key={project.id} delay={80 + i * 80}>
-                <div className="card p-6 hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 flex flex-col h-full">
+                <div className="card p-2 hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 flex flex-col h-full">
                   <DevicePair project={project} />
 
                   <div className="flex items-start justify-between gap-4 mb-3">
@@ -140,11 +142,11 @@ function DevicePair({ project, featured = false }) {
   if (project.mobileOnly) {
     return (
       <div className="flex items-end justify-center mb-6">
-        <IphoneFrame width={featured ? 110 : 85}>
+        <IphoneFrame width={120}>
           <ThumbnailSlider
             slides={mobileSlides}
             uid={`${project.id}-m`}
-            height={Math.round((featured ? 110 : 85) * 2.12)}
+            height={Math.round((120) * 2.12)}
             thumbColors={project.thumbColors}
             title={project.title}
             compact
@@ -156,10 +158,13 @@ function DevicePair({ project, featured = false }) {
 
   return (
     // Outer div: measures available width, clips any overflow
-    <div ref={wrapRef} className="w-full overflow-hidden mb-6">
-      {/* Inner stage: fixed natural size, scaled down to fit */}
+    <div
+      ref={wrapRef}
+      className={`w-full items-center justify-center overflow-hidden mb-6 ${featured?`-ml-7`:``}`}
+      style={{ height: naturalH * scale }}
+    >
       <div
-        className="select-none flex items-end justify-center"
+        className={`select-none flex items-center justify-center ` }
         style={{
           width: naturalW,
           height: naturalH,
@@ -189,10 +194,10 @@ function DevicePair({ project, featured = false }) {
           style={{
             position: "relative",
             zIndex: 2,
-            marginLeft: -18,
             marginBottom: 10,
             flexShrink: 0,
           }}
+          className={` ${featured ? `-ml-25` : `-ml-10`}`}
         >
           <IphoneFrame width={iphW}>
             <ThumbnailSlider
