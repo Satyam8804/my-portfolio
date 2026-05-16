@@ -1,4 +1,5 @@
 import config from "../portfolio.config";
+import Capsule from "../utils/Capsule";
 import Reveal from "../utils/Reveal";
 
 export default function Skills() {
@@ -9,11 +10,11 @@ export default function Skills() {
     >
       <div className="max-w-6xl mx-auto px-6">
         <Reveal>
-          <p className="section-label text-center">What I work with</p>
+          <p className="section-label ">What I work with</p>
         </Reveal>
 
         <Reveal delay={80}>
-          <h2 className="section-title text-center">Technical Skills</h2>
+          <h2 className="section-title ">Technical Skills</h2>
         </Reveal>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -33,9 +34,7 @@ export default function Skills() {
                 </div>
                 <div className="flex flex-wrap gap-2">
                   {group.items.map((skill, j) => (
-                    <span key={j} className="tag">
-                      {skill}
-                    </span>
+                    <Capsule key={j} className="tag" skill={skill} isSkill/>
                   ))}
                 </div>
               </div>

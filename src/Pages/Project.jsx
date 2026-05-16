@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import config from "../portfolio.config";
 import Reveal from "../utils/Reveal";
+import Capsule from "../utils/Capsule";
 
 export default function Projects() {
   const featured = config.projects.find((p) => p.featured);
@@ -50,9 +51,7 @@ export default function Projects() {
                 </p>
                 <div className="flex flex-wrap gap-2">
                   {featured.techStack.map((tech, i) => (
-                    <span key={i} className="tag">
-                      {tech}
-                    </span>
+                    <Capsule key={i} className="tag" skill={tech}/>
                   ))}
                 </div>
               </div>
@@ -86,9 +85,7 @@ export default function Projects() {
                   </p>
                   <div className="flex flex-wrap gap-2">
                     {project.techStack.map((tech, i) => (
-                      <span key={i} className="tag">
-                        {tech}
-                      </span>
+                      <Capsule key={i} className="tag" skill={tech}/>
                     ))}
                   </div>
                 </div>

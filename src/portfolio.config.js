@@ -126,12 +126,7 @@ const portfolioConfig = {
       featured: true,
       status: "Live",
 
-      // ── Thumbnails ─────────────────────────────────────────
-      // Use separate desktop + mobile arrays for the device mockup.
-      // Desktop images: wide / landscape screenshots (16:9 or similar).
-      // Mobile images:  portrait screenshots taken on a phone (9:16 or similar).
-      // Both arrays are optional — omit either to reuse the other,
-      // or leave thumbnails out entirely to show the gradient placeholder.
+    
       thumbnails: {
         desktop: [chatifyD1, chatifyD2, chatifyD3, chatifyD4, chatifyD5],
         mobile: [chatifyM1, chatifyM2, chatifyM3, chatifyM4, chatifyM5],
@@ -173,7 +168,7 @@ const portfolioConfig = {
       subtitle: "Mobile Book Reader App",
       mobileOnly: true,
       description:
-        "Android app for book enthusiasts supporting 10+ genres with Firebase-backed storage for 500+ books. Features secure auth, offline SQLite support, and dynamic user contributions.",
+        "Android app for book enthusiasts supporting 10+ genres with Firebase-backed storage for 100+ books. Features secure auth, offline SQLite support, and dynamic user contributions.",
       techStack: ["Android", "Kotlin", "XML", "Firebase", "SQLite"],
       demoUrl: "",
       githubUrl: "https://github.com/Satyam8804/BookOpedia",
@@ -221,9 +216,9 @@ const portfolioConfig = {
 
   // ── Stats (shown on Hero) ──────────────────────────────────
   stats: [
-    { label: "Projects Built", value: "3+" },
+    { label: "Projects Built", value: "15+" },
     { label: "LeetCode Solved", value: "255+" },
-    { label: "Hard Problems", value: "28" },
+    { label: "Hard Problems", value: "30+" },
   ],
 };
 
