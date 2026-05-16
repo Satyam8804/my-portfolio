@@ -1,6 +1,8 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import config from "../portfolio.config";
 import Reveal from "../utils/Reveal";
+import Skills from "./Skills";
+import Capsule from "../utils/Capsule";
 
 export default function Projects() {
   const featured = config.projects.find((p) => p.featured);
@@ -52,9 +54,7 @@ export default function Projects() {
                 </p>
                 <div className="flex flex-wrap gap-2">
                   {featured.techStack.map((tech, i) => (
-                    <span key={i} className="tag">
-                      {tech}
-                    </span>
+                    <Capsule key={i} className="tag" Skills={tech} />
                   ))}
                 </div>
               </div>
@@ -88,9 +88,7 @@ export default function Projects() {
                   </p>
                   <div className="flex flex-wrap gap-2">
                     {project.techStack.map((tech, i) => (
-                      <span key={i} className="tag">
-                        {tech}
-                      </span>
+                      <Capsule key={i} className="tag" Skills={tech} />
                     ))}
                   </div>
                 </div>
@@ -146,7 +144,7 @@ function DevicePair({ project, featured = false }) {
           <ThumbnailSlider
             slides={mobileSlides}
             uid={`${project.id}-m`}
-            height={Math.round((120) * 2.12)}
+            height={Math.round(120 * 2.12)}
             thumbColors={project.thumbColors}
             title={project.title}
             compact
@@ -160,11 +158,13 @@ function DevicePair({ project, featured = false }) {
     // Outer div: measures available width, clips any overflow
     <div
       ref={wrapRef}
-      className={`w-full items-center justify-center overflow-hidden mb-6 ${featured?`-ml-7`:``}`}
+      className={`w-full items-center justify-center overflow-hidden mb-6 ${
+        featured ? `-ml-7` : ``
+      }`}
       style={{ height: naturalH * scale }}
     >
       <div
-        className={`select-none flex items-center justify-center ` }
+        className={`select-none flex items-center justify-center `}
         style={{
           width: naturalW,
           height: naturalH,
