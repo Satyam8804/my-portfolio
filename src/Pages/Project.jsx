@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import config from "../portfolio.config";
 import Reveal from "../utils/Reveal";
-import Capsule from "../utils/Capsule";
 
 export default function Projects() {
   const featured = config.projects.find((p) => p.featured);
@@ -51,7 +50,9 @@ export default function Projects() {
                 </p>
                 <div className="flex flex-wrap gap-2">
                   {featured.techStack.map((tech, i) => (
-                    <Capsule key={i} className="tag" skill={tech}/>
+                    <span key={i} className="tag">
+                      {tech}
+                    </span>
                   ))}
                 </div>
               </div>
@@ -85,7 +86,9 @@ export default function Projects() {
                   </p>
                   <div className="flex flex-wrap gap-2">
                     {project.techStack.map((tech, i) => (
-                      <Capsule key={i} className="tag" skill={tech}/>
+                      <span key={i} className="tag">
+                        {tech}
+                      </span>
                     ))}
                   </div>
                 </div>
@@ -109,6 +112,23 @@ function DevicePair({ project, featured = false }) {
   const iphW = featured ? 92 : 72;
   const macScreenH = Math.round(macW * 0.575);
   const iphScreenH = Math.round(iphW * 2.12);
+
+  // Natural width of both devices together (minus 18px overlap)
+  const naturalW = macW + iphW - 18;
+  const naturalH = macScreenH + 52; // screen + stand height
+
+  const wrapRef = useRef(null);
+  const [scale, setScale] = useState(1);
+
+  useEffect(() => {
+    if (!wrapRef.current) return;
+    const obs = new ResizeObserver(([entry]) => {
+      const available = entry.contentRect.width;
+      setScale(available < naturalW ? available / naturalW : 1);
+    });
+    obs.observe(wrapRef.current);
+    return () => obs.disconnect();
+  }, [naturalW]);
 
   // Support both old array format and new { desktop, mobile } format
   const thumbs = project.thumbnails;
@@ -135,45 +155,57 @@ function DevicePair({ project, featured = false }) {
   }
 
   return (
-    <div
-      className="flex items-end justify-center mb-6 select-none"
-      style={{ minHeight: macScreenH + 52 }}
-    >
-      {/* MacBook */}
-      <div style={{ position: "relative", zIndex: 1, flexShrink: 0 }}>
-        <MacbookFrame width={macW}>
-          <ThumbnailSlider
-            slides={desktopSlides}
-            uid={`${project.id}-d`}
-            height={macScreenH}
-            thumbColors={project.thumbColors}
-            thumbIcon={project.thumbIcon}
-            title={project.title}
-          />
-        </MacbookFrame>
-      </div>
-
-      {/* iPhone — overlaps MacBook slightly */}
+    // Outer div: measures available width, clips any overflow
+    <div ref={wrapRef} className="w-full overflow-hidden mb-6">
+      {/* Inner stage: fixed natural size, scaled down to fit */}
       <div
+        className="select-none flex items-end justify-center"
         style={{
-          position: "relative",
-          zIndex: 2,
-          marginLeft: -18,
-          marginBottom: 10,
-          flexShrink: 0,
+          width: naturalW,
+          height: naturalH,
+          transform: `scale(${scale})`,
+          transformOrigin: "top center",
+          // collapse the extra vertical space that scale creates
+          marginBottom: naturalH * (scale - 1),
+          margin: "0 auto",
         }}
       >
-        <IphoneFrame width={iphW}>
-          <ThumbnailSlider
-            slides={mobileSlides}
-            uid={`${project.id}-m`}
-            height={iphScreenH}
-            thumbColors={project.thumbColors}
-            thumbIcon={project.thumbIcon}
-            title={project.title}
-            compact
-          />
-        </IphoneFrame>
+        {/* MacBook */}
+        <div style={{ position: "relative", zIndex: 1, flexShrink: 0 }}>
+          <MacbookFrame width={macW}>
+            <ThumbnailSlider
+              slides={desktopSlides}
+              uid={`${project.id}-d`}
+              height={macScreenH}
+              thumbColors={project.thumbColors}
+              thumbIcon={project.thumbIcon}
+              title={project.title}
+            />
+          </MacbookFrame>
+        </div>
+
+        {/* iPhone — overlaps MacBook slightly */}
+        <div
+          style={{
+            position: "relative",
+            zIndex: 2,
+            marginLeft: -18,
+            marginBottom: 10,
+            flexShrink: 0,
+          }}
+        >
+          <IphoneFrame width={iphW}>
+            <ThumbnailSlider
+              slides={mobileSlides}
+              uid={`${project.id}-m`}
+              height={iphScreenH}
+              thumbColors={project.thumbColors}
+              thumbIcon={project.thumbIcon}
+              title={project.title}
+              compact
+            />
+          </IphoneFrame>
+        </div>
       </div>
     </div>
   );
@@ -507,7 +539,7 @@ function ThumbnailSlider({
         <img
           src={slides[0]}
           alt={`${title} screenshot`}
-          style={{ width: "100%", height: "100%", objectFit: "cover" }}
+          style={{ width: "100%", height: "100%", objectFit: "contain" }}
         />
         <BottomGradient />
       </div>
@@ -533,7 +565,7 @@ function ThumbnailSlider({
         style={{
           width: "100%",
           height: "100%",
-          objectFit: "cover",
+          objectFit: "contain",
           opacity,
           transition: "opacity 0.35s ease",
           display: "block",
