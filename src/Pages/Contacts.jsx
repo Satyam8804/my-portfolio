@@ -1,5 +1,12 @@
+import { useRef, useState } from "react";
+import emailjs from "@emailjs/browser";
 import config from "../portfolio.config";
 import Reveal from "../utils/Reveal";
+
+
+const EMAILJS_SERVICE_ID  = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+const EMAILJS_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+const EMAILJS_PUBLIC_KEY  = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
 
 const contactLinks = [
   {
@@ -35,6 +42,58 @@ const contactLinks = [
 ];
 
 export default function Contacts() {
+  const formRef = useRef(null);
+
+  const [fields, setFields] = useState({
+    name: "",
+    email: "",
+    subject: "",
+    message: "",
+  });
+  const [status, setStatus] = useState("idle"); // "idle" | "sending" | "success" | "error"
+  const [errorMsg, setErrorMsg] = useState("");
+
+  function handleChange(e) {
+    setFields((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  }
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+
+    const { name, email, subject, message } = fields;
+    if (!name.trim() || !email.trim() || !subject.trim() || !message.trim()) {
+      setStatus("error");
+      setErrorMsg("Please fill in all fields before sending.");
+      return;
+    }
+
+    setStatus("sending");
+    setErrorMsg("");
+
+    try {
+      await emailjs.send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        {
+          from_name:  name,
+          from_email: email,
+          subject:    subject,
+          message:    message,
+          to_name:    config.name, // optional — use in template as {{to_name}}
+        },
+        EMAILJS_PUBLIC_KEY
+      );
+      setStatus("success");
+      setFields({ name: "", email: "", subject: "", message: "" });
+    } catch (err) {
+      console.error("EmailJS error:", err);
+      setStatus("error");
+      setErrorMsg("Something went wrong. Please try again or email me directly.");
+    }
+  }
+
+  const isSending = status === "sending";
+
   return (
     <section
       id="contact"
@@ -70,7 +129,7 @@ export default function Contacts() {
             <div className="flex flex-col gap-1">
               {contactLinks.map((item, i) => (
                 <Reveal key={item.label} delay={180 + i * 50}>
-                  <a
+                  
                     href={item.href}
                     target="_blank"
                     rel="noreferrer"
@@ -102,34 +161,81 @@ export default function Contacts() {
               <h3 className="text-gray-900 dark:text-white font-semibold text-lg mb-6">
                 Send a message
               </h3>
+
+              {/* ── Success banner ── */}
+              {status === "success" && (
+                <div className="mb-5 flex items-center gap-3 rounded-lg border border-green-200 dark:border-green-700 bg-green-50 dark:bg-green-900/20 px-4 py-3 text-sm text-green-700 dark:text-green-400">
+                  <span>✅</span>
+                  <span>Message sent! I'll get back to you soon.</span>
+                </div>
+              )}
+
+              {/* ── Error banner ── */}
+              {status === "error" && (
+                <div className="mb-5 flex items-center gap-3 rounded-lg border border-red-200 dark:border-red-700 bg-red-50 dark:bg-red-900/20 px-4 py-3 text-sm text-red-600 dark:text-red-400">
+                  <span>⚠️</span>
+                  <span>{errorMsg}</span>
+                </div>
+              )}
+
               <form
+                ref={formRef}
                 className="flex flex-col gap-4"
-                onSubmit={(e) => e.preventDefault()}
+                onSubmit={handleSubmit}
+                noValidate
               >
                 <div className="grid grid-cols-2 gap-4">
-                  <FormField label="Name" type="text" placeholder="Your name" />
-                  <FormField label="Email" type="email" placeholder="your@email.com" />
+                  <FormField
+                    label="Name"
+                    name="name"
+                    type="text"
+                    placeholder="Your name"
+                    value={fields.name}
+                    onChange={handleChange}
+                    disabled={isSending}
+                  />
+                  <FormField
+                    label="Email"
+                    name="email"
+                    type="email"
+                    placeholder="your@email.com"
+                    value={fields.email}
+                    onChange={handleChange}
+                    disabled={isSending}
+                  />
                 </div>
+
                 <FormField
                   label="Subject"
+                  name="subject"
                   type="text"
                   placeholder="What's this about?"
+                  value={fields.subject}
+                  onChange={handleChange}
+                  disabled={isSending}
                 />
+
                 <div>
                   <label className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide block mb-2">
                     Message
                   </label>
                   <textarea
+                    name="message"
                     rows={4}
                     placeholder="Tell me about your project..."
-                    className="w-full bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg px-4 py-3 text-gray-900 dark:text-white text-sm placeholder-gray-400 dark:placeholder-gray-600 focus:outline-none focus:border-accent-500 transition-colors resize-none"
+                    value={fields.message}
+                    onChange={handleChange}
+                    disabled={isSending}
+                    className="w-full bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg px-4 py-3 text-gray-900 dark:text-white text-sm placeholder-gray-400 dark:placeholder-gray-600 focus:outline-none focus:border-accent-500 transition-colors resize-none disabled:opacity-50"
                   />
                 </div>
+
                 <button
                   type="submit"
-                  className="w-full bg-accent-600 hover:bg-accent-700 text-white font-semibold py-3 rounded-lg text-sm transition-colors duration-200"
+                  disabled={isSending}
+                  className="w-full bg-accent-600 hover:bg-accent-700 disabled:opacity-60 disabled:cursor-not-allowed text-white font-semibold py-3 rounded-lg text-sm transition-colors duration-200"
                 >
-                  Send Message →
+                  {isSending ? "Sending…" : "Send Message →"}
                 </button>
               </form>
             </div>
@@ -154,7 +260,7 @@ export default function Contacts() {
 }
 
 /* ── Reusable form field ── */
-function FormField({ label, type, placeholder }) {
+function FormField({ label, name, type, placeholder, value, onChange, disabled }) {
   return (
     <div>
       <label className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide block mb-2">
@@ -162,8 +268,12 @@ function FormField({ label, type, placeholder }) {
       </label>
       <input
         type={type}
+        name={name}
         placeholder={placeholder}
-        className="w-full bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg px-4 py-3 text-gray-900 dark:text-white text-sm placeholder-gray-400 dark:placeholder-gray-600 focus:outline-none focus:border-accent-500 transition-colors"
+        value={value}
+        onChange={onChange}
+        disabled={disabled}
+        className="w-full bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg px-4 py-3 text-gray-900 dark:text-white text-sm placeholder-gray-400 dark:placeholder-gray-600 focus:outline-none focus:border-accent-500 transition-colors disabled:opacity-50"
       />
     </div>
   );
