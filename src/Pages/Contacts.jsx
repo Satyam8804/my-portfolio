@@ -129,7 +129,7 @@ export default function Contacts() {
             <div className="flex flex-col gap-1">
               {contactLinks.map((item, i) => (
                 <Reveal key={item.label} delay={180 + i * 50}>
-                  
+                  <a
                     href={item.href}
                     target="_blank"
                     rel="noreferrer"
