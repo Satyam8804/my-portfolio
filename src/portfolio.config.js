@@ -23,6 +23,7 @@ import bookOpediaM1 from "./image/bookOpedia/landing.png";
 
 import dp from "./image/dp.jpeg";
 
+
 const portfolioConfig = {
   name: "Satyam Kumar",
   title: "Full Stack Developer",
