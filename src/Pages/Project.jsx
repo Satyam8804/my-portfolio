@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import config from "../portfolio.config";
 import Reveal from "../utils/Reveal";
-import Skills from "./Skills";
 import Capsule from "../utils/Capsule";
 
 export default function Projects() {

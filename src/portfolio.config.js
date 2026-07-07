@@ -10,6 +10,20 @@ import chatifyM3 from "./image/chatify/mobile/chatify-chatItems-mb.png";
 import chatifyM4 from "./image/chatify/mobile/chatify-contactInfo-mb.png";
 import chatifyM5 from "./image/chatify/mobile/chatify-callhistory-mb.png";
 
+import snipD1 from "./image/snip/desktop/snipD1.png";
+import snipD2 from "./image/snip/desktop/snipD2.png";
+import snipD3 from "./image/snip/desktop/snipD3.png";
+import snipD4 from "./image/snip/desktop/snipD4.png";
+import snipD5 from "./image/snip/desktop/snipD5.png";
+import snipD6 from "./image/snip/desktop/snipD6.png";
+
+import snipM1 from "./image/snip/mobile/snipM1.png";
+import snipM2 from "./image/snip/mobile/snipM2.png";
+import snipM3 from "./image/snip/mobile/snipM3.png";
+import snipM4 from "./image/snip/mobile/snipM4.png";
+import snipM5 from "./image/snip/mobile/snipM5.png";
+import snipM6 from "./image/snip/mobile/snipM6.png";
+
 import fwD1 from "./image/flashwash/desktop/flashwash-register.png";
 import fwD2 from "./image/flashwash/desktop/flashwash-landing.png";
 import fwD3 from "./image/flashwash/desktop/flashwash-book.png";
@@ -20,9 +34,7 @@ import fwM3 from "./image/flashwash/mobile/flashwash-book-mb.png";
 
 import bookOpediaM1 from "./image/bookOpedia/landing.png";
 
-
 import dp from "./image/dp.jpeg";
-
 
 const portfolioConfig = {
   name: "Satyam Kumar",
@@ -127,7 +139,6 @@ const portfolioConfig = {
       featured: true,
       status: "Live",
 
-    
       thumbnails: {
         desktop: [chatifyD1, chatifyD2, chatifyD3, chatifyD4, chatifyD5],
         mobile: [chatifyM1, chatifyM2, chatifyM3, chatifyM4, chatifyM5],
@@ -135,9 +146,35 @@ const portfolioConfig = {
 
       thumbColors: ["#1e1b4b", "#312e81"], // shown when thumbnails are missing
     },
-
     {
       id: 2,
+      title: "Snip",
+      subtitle: "URL Shortener with Analytics",
+      description:
+        "Full-stack URL shortening service with JWT-based authentication, Base62 encoding, and real-time click analytics. Built with TTL-indexed MongoDB collections for automatic link expiry and a Redux Toolkit-powered dashboard for link management.",
+      techStack: [
+        "React.js",
+        "TypeScript",
+        "Redux Toolkit",
+        "Node.js",
+        "Express.js",
+        "MongoDB",
+        "JWT",
+      ],
+      demoUrl: "https://satyam.vibenest.net/",
+      githubUrl: "https://github.com/Satyam8804/Snip",
+      featured: false,
+      status: "Live",
+
+      thumbnails: {
+        desktop: [snipD1, snipD2, snipD3, snipD4, snipD5, snipD6],
+        mobile: [snipM1, snipM2, snipM3, snipM4, snipM5, snipM6],
+      },
+
+      thumbColors: ["#0f766e", "#134e4a"], // shown when thumbnails are missing
+    },
+    {
+      id: 3,
       title: "FlashWash",
       subtitle: "Car Wash Booking Platform",
       description:
@@ -164,7 +201,7 @@ const portfolioConfig = {
     },
 
     {
-      id: 3,
+      id: 4,
       title: "BookOpedia",
       subtitle: "Mobile Book Reader App",
       mobileOnly: true,
