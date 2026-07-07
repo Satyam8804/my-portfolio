@@ -161,7 +161,7 @@ const portfolioConfig = {
         "MongoDB",
         "JWT",
       ],
-      demoUrl: "https://satyam.vibenest.net/",
+      demoUrl: "https://snip-1-zube.onrender.com/",
       githubUrl: "https://github.com/Satyam8804/Snip",
       featured: false,
       status: "Live",
