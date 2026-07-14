@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import config from "../portfolio.config";
 import Reveal from "../utils/Reveal";
 import VisitorCounter from "../Components/VisitorCounter";
+import SectionBackground from "../Components/SectionBackgound";
 
 const BASE = "https://alfa-leetcode-api.onrender.com";
 
@@ -89,9 +90,10 @@ export default function Home() {
   return (
     <section
       id="home"
-      className="min-h-screen bg-gray-50 dark:bg-gray-950 flex items-center pt-16 transition-colors duration-300"
+      className="relative isolate min-h-screen bg-gray-50 dark:bg-gray-950 flex items-center pt-16 transition-colors duration-300"
     >
-      <div className="max-w-6xl mx-auto px-6 py-20 w-full">
+      <SectionBackground variant="grid" />
+      <div className="relative z-10 max-w-6xl mx-auto px-6 py-20 w-full">
         <VisitorCounter />
         <div className="grid md:grid-cols-[1fr_auto] gap-12 items-center">
           {/* ── Text ── */}
@@ -106,7 +108,7 @@ export default function Home() {
             <Reveal delay={80}>
               <h1 className="font-display text-5xl md:text-7xl font-bold text-gray-900 dark:text-white leading-tight mb-4">
                 Hi, I'm{" "}
-                <span className="text-accent-600 dark:text-accent-400 italic">
+                <span className="text-green-600 dark:text-green-400 italic">
                   {config.name.split(" ")[0]}
                 </span>
               </h1>

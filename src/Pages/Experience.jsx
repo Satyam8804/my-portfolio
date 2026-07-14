@@ -1,3 +1,4 @@
+import SectionBackground from "../Components/SectionBackgound";
 import config from "../portfolio.config";
 import Reveal from "../utils/Reveal";
 
@@ -5,9 +6,10 @@ export default function Experience() {
   return (
     <section
       id="experience"
-      className="py-24 bg-gray-50 dark:bg-gray-950 transition-colors duration-300"
+      className="relative isolate py-24 bg-gray-50 dark:bg-gray-950 transition-colors duration-300"
     >
-      <div className="max-w-6xl mx-auto px-6">
+      <SectionBackground variant="dots" />
+      <div className=" relative z-10 max-w-6xl mx-auto px-6">
         <Reveal>
           <p className="section-label">Where I've worked</p>
         </Reveal>

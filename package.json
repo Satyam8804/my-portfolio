@@ -13,8 +13,10 @@
     "@emailjs/browser": "^4.4.1",
     "@tailwindcss/vite": "^4.3.0",
     "@upstash/redis": "^1.38.0",
+    "lucide-react": "^1.24.0",
     "react": "^19.2.6",
     "react-dom": "^19.2.6",
+    "react-icons": "^5.7.0",
     "react-router-dom": "^7.15.1",
     "tailwindcss": "^4.3.0"
   },

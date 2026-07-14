@@ -2,6 +2,7 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import config from "../portfolio.config";
 import Reveal from "../utils/Reveal";
 import Capsule from "../utils/Capsule";
+import SectionBackground from "../Components/SectionBackgound";
 
 export default function Projects() {
   const featured = config.projects.find((p) => p.featured);
@@ -10,9 +11,11 @@ export default function Projects() {
   return (
     <section
       id="projects"
-      className="py-24 bg-white dark:bg-gray-900 transition-colors duration-300"
+      className="relative isolate overflow-hidden py-24 bg-white dark:bg-gray-900 transition-colors duration-300"
     >
-      <div className="max-w-6xl mx-auto px-2">
+      <SectionBackground variant="dots" />
+
+      <div className="relative z-10 max-w-6xl mx-auto px-2">
         <Reveal>
           <p className="section-label font-extrabold">What I've built</p>
         </Reveal>
@@ -27,7 +30,7 @@ export default function Projects() {
           {/* Featured project */}
           {featured && (
             <Reveal delay={100}>
-              <div className="card p-0 bg-accent-50 dark:bg-accent-600/5 border-accent-200 dark:border-accent-600/20 hover:shadow-lg transition-all duration-200">
+              <div className="card p-4 rounded bg-accent-50 dark:bg-accent-600/5 border-accent-200 dark:border-accent-600/20 hover:shadow-lg transition-all duration-200">
                 <DevicePair project={featured} featured />
 
                 <div className="flex flex-wrap items-start justify-between gap-4 mb-4">
@@ -64,7 +67,7 @@ export default function Projects() {
           <div className="grid md:grid-cols-2 gap-6">
             {rest.map((project, i) => (
               <Reveal key={project.id} delay={80 + i * 80}>
-                <div className="card p-2 hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 flex flex-col h-full">
+                <div className="hover:rounded card p-2 hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 flex flex-col h-full">
                   <DevicePair project={project} />
 
                   <div className="flex items-start justify-between gap-4 mb-3">

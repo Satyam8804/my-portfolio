@@ -18,3 +18,12 @@ body {
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
 }
+
+/* add to your global css / index.css */
+@keyframes drift {
+  from { background-position: 0 0; }
+  to   { background-position: 28px 28px; }
+}
+.animate-drift {
+  animation: drift 6s linear infinite;
+}

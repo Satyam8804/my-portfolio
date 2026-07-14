@@ -1,41 +1,50 @@
 import { useRef, useState } from "react";
 import emailjs from "@emailjs/browser";
+import {
+  Mail,
+  Phone,
+  Code2,
+  ArrowUpRight,
+  CheckCircle2,
+  AlertCircle,
+} from "lucide-react";
+import { FaGithub, FaLinkedin } from "react-icons/fa";
 import config from "../portfolio.config";
 import Reveal from "../utils/Reveal";
+import SectionBackground from "../Components/SectionBackgound";
 
-
-const EMAILJS_SERVICE_ID  = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+const EMAILJS_SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
 const EMAILJS_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
-const EMAILJS_PUBLIC_KEY  = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+const EMAILJS_PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
 
 const contactLinks = [
   {
     label: "Email",
-    icon: "✉️",
+    icon: Mail,
     value: config.email,
     href: `mailto:${config.email}`,
   },
   {
     label: "Phone",
-    icon: "📞",
+    icon: Phone,
     value: config.phone,
     href: `tel:${config.phone}`,
   },
   {
     label: "LinkedIn",
-    icon: "💼",
+    icon: FaLinkedin,
     value: "linkedin.com/in/Satyam8804",
     href: config.social.linkedin,
   },
   {
     label: "GitHub",
-    icon: "🐙",
+    icon: FaGithub,
     value: "github.com/Satyam8804",
     href: config.social.github,
   },
   {
     label: "LeetCode",
-    icon: "⚡",
+    icon: Code2,
     value: "leetcode.com/Satyam8804",
     href: config.social.leetcode,
   },
@@ -75,11 +84,11 @@ export default function Contacts() {
         EMAILJS_SERVICE_ID,
         EMAILJS_TEMPLATE_ID,
         {
-          from_name:  name,
+          from_name: name,
           from_email: email,
-          subject:    subject,
-          message:    message,
-          to_name:    config.name, // optional — use in template as {{to_name}}
+          subject: subject,
+          message: message,
+          to_name: config.name,
         },
         EMAILJS_PUBLIC_KEY
       );
@@ -88,7 +97,9 @@ export default function Contacts() {
     } catch (err) {
       console.error("EmailJS error:", err);
       setStatus("error");
-      setErrorMsg("Something went wrong. Please try again or email me directly.");
+      setErrorMsg(
+        "Something went wrong. Please try again or email me directly."
+      );
     }
   }
 
@@ -97,11 +108,11 @@ export default function Contacts() {
   return (
     <section
       id="contact"
-      className="py-24 bg-gray-50 dark:bg-gray-950 transition-colors duration-300"
+      className="relative isolate overflow-hidden py-24 bg-gray-50 dark:bg-gray-950 transition-colors duration-300"
     >
-      <div className="max-w-6xl mx-auto px-6">
+      <SectionBackground variant="dots" />
+      <div className="relative z-10 max-w-6xl mx-auto px-6">
         <div className="grid md:grid-cols-2 gap-16">
-
           {/* ── Left: links ── */}
           <div>
             <Reveal>
@@ -127,31 +138,39 @@ export default function Contacts() {
             </Reveal>
 
             <div className="flex flex-col gap-1">
-              {contactLinks.map((item, i) => (
-                <Reveal key={item.label} delay={180 + i * 50}>
-                  <a
-                    href={item.href}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="flex items-center gap-4 py-3 border-b border-gray-200 dark:border-gray-800 text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors duration-200 group"
-                  >
-                    <span className="w-9 h-9 rounded-lg bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 flex items-center justify-center text-base group-hover:bg-accent-50 dark:group-hover:bg-accent-600/10 group-hover:border-accent-200 dark:group-hover:border-accent-600/20 transition-colors flex-shrink-0">
-                      {item.icon}
-                    </span>
-                    <div>
-                      <div className="text-xs font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-wide">
-                        {item.label}
+              {contactLinks.map((item, i) => {
+                const Icon = item.icon;
+                return (
+                  <Reveal key={item.label} delay={180 + i * 50}>
+                    <a
+                      href={item.href}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="flex items-center gap-4 py-3 border-b border-gray-200 dark:border-gray-800 text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors duration-200 group"
+                    >
+                      <span className="w-9 h-9 rounded-lg bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 flex items-center justify-center group-hover:bg-accent-50 dark:group-hover:bg-accent-600/10 group-hover:border-accent-200 dark:group-hover:border-accent-600/20 transition-colors flex-shrink-0">
+                        <Icon
+                          size={16}
+                          strokeWidth={2}
+                          className="text-gray-500 dark:text-gray-400 group-hover:text-accent-600 dark:group-hover:text-accent-400 transition-colors"
+                        />
+                      </span>
+                      <div>
+                        <div className="text-xs font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-wide">
+                          {item.label}
+                        </div>
+                        <div className="text-sm text-gray-700 dark:text-gray-300 group-hover:text-gray-900 dark:group-hover:text-white transition-colors">
+                          {item.value}
+                        </div>
                       </div>
-                      <div className="text-sm text-gray-700 dark:text-gray-300 group-hover:text-gray-900 dark:group-hover:text-white transition-colors">
-                        {item.value}
-                      </div>
-                    </div>
-                    <span className="ml-auto text-gray-300 dark:text-gray-600 group-hover:text-gray-500 dark:group-hover:text-gray-400 transition-colors">
-                      ↗
-                    </span>
-                  </a>
-                </Reveal>
-              ))}
+                      <ArrowUpRight
+                        size={16}
+                        className="ml-auto text-gray-300 dark:text-gray-600 group-hover:text-accent-500 transition-colors"
+                      />
+                    </a>
+                  </Reveal>
+                );
+              })}
             </div>
           </div>
 
@@ -162,18 +181,16 @@ export default function Contacts() {
                 Send a message
               </h3>
 
-              {/* ── Success banner ── */}
               {status === "success" && (
                 <div className="mb-5 flex items-center gap-3 rounded-lg border border-green-200 dark:border-green-700 bg-green-50 dark:bg-green-900/20 px-4 py-3 text-sm text-green-700 dark:text-green-400">
-                  <span>✅</span>
+                  <CheckCircle2 size={18} className="flex-shrink-0" />
                   <span>Message sent! I'll get back to you soon.</span>
                 </div>
               )}
 
-              {/* ── Error banner ── */}
               {status === "error" && (
                 <div className="mb-5 flex items-center gap-3 rounded-lg border border-red-200 dark:border-red-700 bg-red-50 dark:bg-red-900/20 px-4 py-3 text-sm text-red-600 dark:text-red-400">
-                  <span>⚠️</span>
+                  <AlertCircle size={18} className="flex-shrink-0" />
                   <span>{errorMsg}</span>
                 </div>
               )}
@@ -233,14 +250,14 @@ export default function Contacts() {
                 <button
                   type="submit"
                   disabled={isSending}
-                  className="w-full bg-accent-600 hover:bg-accent-700 disabled:opacity-60 disabled:cursor-not-allowed text-white font-semibold py-3 rounded-lg text-sm transition-colors duration-200"
+                  className="w-full bg-accent-600 hover:bg-accent-700 disabled:opacity-60 disabled:cursor-not-allowed text-white font-semibold py-3 rounded-lg text-sm transition-colors duration-200 flex items-center justify-center gap-2"
                 >
-                  {isSending ? "Sending…" : "Send Message →"}
+                  {isSending ? "Sending…" : "Send Message"}
+                  {!isSending && <ArrowUpRight size={16} />}
                 </button>
               </form>
             </div>
           </Reveal>
-
         </div>
 
         {/* ── Footer ── */}
@@ -253,14 +270,21 @@ export default function Contacts() {
             · {new Date().getFullYear()}
           </div>
         </Reveal>
-
       </div>
     </section>
   );
 }
 
 /* ── Reusable form field ── */
-function FormField({ label, name, type, placeholder, value, onChange, disabled }) {
+function FormField({
+  label,
+  name,
+  type,
+  placeholder,
+  value,
+  onChange,
+  disabled,
+}) {
   return (
     <div>
       <label className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide block mb-2">

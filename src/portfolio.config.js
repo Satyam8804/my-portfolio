@@ -113,7 +113,7 @@ const portfolioConfig = {
     {
       category: "CS Fundamentals",
       icon: "🧠",
-      items: ["DSA", "OOPs", "DBMS", "OS", "255+ LeetCode (135M, 28H)"],
+      items: ["DSA", "OOPs", "DBMS", "OS", "355+ LeetCode"],
     },
   ],
 
@@ -255,8 +255,8 @@ const portfolioConfig = {
   // ── Stats (shown on Hero) ──────────────────────────────────
   stats: [
     { label: "Projects Built", value: "15+" },
-    { label: "LeetCode Solved", value: "255+" },
-    { label: "Hard Problems", value: "30+" },
+    { label: "LeetCode Solved", value: "350+" },
+    { label: "Hard Problems", value: "45+" },
   ],
 };
 

@@ -1,76 +1,17 @@
-import { stringToColorPair } from "./StringToColor";
-
 const Capsule = ({ skill, isSkill }) => {
-  const { background, color } = stringToColorPair(skill);
+  if (isSkill) {
+    return (
+      <span className="inline-flex items-center text-xs font-medium text-gray-600 dark:text-gray-300 bg-gray-100 dark:bg-gray-800 px-2.5 py-1 rounded-md hover:bg-accent-100 dark:hover:bg-accent-500/15 hover:text-accent-700 dark:hover:text-accent-300 transition-colors duration-150 cursor-default">
+        {skill}
+      </span>
+    );
+  }
 
   return (
-    <div className="relative w-fit">
-      {/* Glow */}
-      {!isSkill && (
-        <div
-          className="absolute -inset-1 rounded-full blur-xl opacity-60"
-          style={{
-            background: `linear-gradient(135deg, ${background}80, transparent)`,
-          }}
-        />
-      )}
-
-      {/* Glass Capsule */}
-      <div
-        className={`
-          relative z-10
-          rounded-full
-          text-sm font-semibold
-          border
-          overflow-hidden
-          ${isSkill ? "px-1 py-0.5" : "px-4 py-1.5"}
-        `}
-        style={{
-          color,
-
-          background: isSkill
-            ? "transparent"
-            : `
-              linear-gradient(
-                135deg,
-                rgba(255,255,255,0.12),
-                rgba(255,255,255,0.04)
-              )
-            `,
-
-          borderColor: `${color}40`,
-
-          backdropFilter: "blur(18px) saturate(180%)",
-          WebkitBackdropFilter: "blur(18px) saturate(180%)",
-
-          boxShadow: isSkill
-            ? "none"
-            : `
-              inset 0 1px 1px rgba(255,255,255,0.18),
-              inset 0 -1px 1px rgba(255,255,255,0.05),
-              0 4px 20px ${color}20
-            `,
-        }}
-      >
-        {/* Top shine */}
-        {!isSkill && (
-          <div
-            className="absolute inset-0 rounded-full pointer-events-none"
-            style={{
-              background: `
-                linear-gradient(
-                  to bottom,
-                  rgba(255,255,255,0.18),
-                  rgba(255,255,255,0.02)
-                )
-              `,
-            }}
-          />
-        )}
-
-        <span className="relative z-10">{skill}</span>
-      </div>
-    </div>
+    <span className="group inline-flex items-center gap-1.5 text-xs font-semibold text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 px-3 py-1.5 rounded-full hover:border-accent-400 dark:hover:border-accent-500 transition-colors duration-200 cursor-default">
+      <span className="w-1.5 h-1.5 rounded-full bg-accent-500 group-hover:scale-125 transition-transform duration-200" />
+      {skill}
+    </span>
   );
 };
 
