@@ -25,6 +25,8 @@ export default function Home() {
       .catch(() => setLcLoading(false));
   }, []);
 
+  
+
   console.log(lcData);
 
   // ── Solved counts ──────────────────────────────────────────
