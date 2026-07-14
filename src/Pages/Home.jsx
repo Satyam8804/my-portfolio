@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import config from "../portfolio.config";
 import Reveal from "../utils/Reveal";
+import VisitorCounter from "../Components/VisitorCounter";
 
 const BASE = "https://alfa-leetcode-api.onrender.com";
 
@@ -90,6 +91,7 @@ export default function Home() {
       id="home"
       className="min-h-screen bg-gray-50 dark:bg-gray-950 flex items-center pt-16 transition-colors duration-300"
     >
+      <VisitorCounter />
       <div className="max-w-6xl mx-auto px-6 py-20 w-full">
         <div className="grid md:grid-cols-[1fr_auto] gap-12 items-center">
           {/* ── Text ── */}
