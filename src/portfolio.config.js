@@ -44,7 +44,7 @@ const portfolioConfig = {
     passionate about building real-time, user-focused web applications. 
     I specialize in the MERN stack and have hands-on experience with 
     WebRTC, WebSockets, and modern frontend frameworks. 
-    With 255+ LeetCode problems solved, I bring strong problem-solving 
+    With 400+ LeetCode problems solved, I bring strong problem-solving 
     skills to every project I work on.`,
 
   email: "satyam8804378323@gmail.com",
