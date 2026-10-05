@@ -53,14 +53,6 @@ export default function About() {
                   GitHub ↗
                 </a>
                 <a
-                  href={config.social.portfolio}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="btn-outline text-sm"
-                >
-                  Portfolio ↗
-                </a>
-                <a
                   href={config.social.leetcode}
                   target="_blank"
                   rel="noreferrer"

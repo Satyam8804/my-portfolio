@@ -55,9 +55,8 @@ const portfolioConfig = {
   // ── Social Links ───────────────────────────────────────────
   social: {
     github: "https://github.com/Satyam8804",
-    linkedin: "https://linkedin.com/in/Satyam8804",
+    linkedin: "https://linkedin.com/in/satyam-kumar--dev",
     twitter: "https://twitter.com/satyam8804",
-    portfolio: "https://satyam8804.github.io/MyPortfolio/portfolio",
     leetcode: "https://leetcode.com/u/satyam_8804/",
   },
 
