@@ -24,6 +24,9 @@ import snipM4 from "./image/snip/mobile/snipM4.png";
 import snipM5 from "./image/snip/mobile/snipM5.png";
 import snipM6 from "./image/snip/mobile/snipM6.png";
 
+import lpu_logo from "./image/lpu.png";
+import tcs_logo from "./image/tcs.png";
+
 import fwD1 from "./image/flashwash/desktop/flashwash-register.png";
 import fwD2 from "./image/flashwash/desktop/flashwash-landing.png";
 import fwD3 from "./image/flashwash/desktop/flashwash-book.png";
@@ -231,11 +234,11 @@ const portfolioConfig = {
       period: "April 2025 – Present",
       location: "Bengaluru, Karnataka",
       type: "Full-time",
-      logo: "TCS",
+      logo: tcs_logo,
       bullets: [
-        "Managed and resolved Salesforce CRM tickets via ServiceNow, diagnosing access issues, opportunity module errors, and configuration incidents for enterprise users.",
-        "Handled Salesforce CRM access provisioning for enterprise users, managing access requests, approvals, and revocations in compliance with security policies and SLA requirements.",
-        "Gained hands-on experience with Apex, Lightning Web Components (LWC), and Salesforce Flows; selected for Salesforce Developer role on PwC client project.",
+        "Develop Salesforce applications for a PwC client using Apex (triggers, batch/queueable classes, REST integrations) and Lightning Web Components.",
+        "Build reusable LWC components and automate business workflows with Flows to reduce manual effort.",
+        "Write Apex test classes, optimize SOQL and Apex for performance, and deliver releases through Agile sprints and code reviews.",
       ],
     },
   ],
@@ -243,9 +246,10 @@ const portfolioConfig = {
   // ── Education ──────────────────────────────────────────────
   education: [
     {
+      logo: lpu_logo,
       institution: "Lovely Professional University (LPU)",
       degree: "B.Tech in Computer Science",
-      period: "Sep 2020 – Present",
+      period: "Sep 2020 – July 2024",
       location: "Phagwara, Punjab",
       courses: ["DSA", "DBMS", "Operating Systems", "Linux Fundamentals"],
     },
